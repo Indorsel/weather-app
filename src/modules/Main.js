@@ -22,9 +22,6 @@ export class Main {
     let weatherBlock = new WeatherLayout()
     weatherBlock.render()
 
-    let geolocationData = new GeolocationData()
-    geolocationData.render()
-
     const eventListeners = new EventListeners()
     eventListeners.isListenersOn()  
   }

@@ -1,8 +1,12 @@
-import { elementCreate } from '../utils/elementCreate'
 import { get } from '../utils/localStorage';
+import { elementCreate } from '../utils/elementCreate'
+import { getWeather } from '../api/weahter_api';
 
 export class WeatherToday {
-  constructor() {}
+  constructor(location, temperature) {
+    this.location = location
+    this.temperature = temperature
+  }
 
   createWrapper() {
     let layoutElem = elementCreate('div', 'weather_today')
@@ -12,7 +16,12 @@ export class WeatherToday {
 
   getDate() {
     let date =  new Date()
-    let newDate = `${date.getDay() + 14}.${date.getMonth() + 1}.${date.getFullYear()}`
+    let newDate = date.toLocaleString('ru', {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'long'
+    })
+    newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
     return newDate
   }
 
@@ -26,21 +35,46 @@ export class WeatherToday {
     setInterval(this.getTime, 1000)
   }
 
+  getLocation() {
+  }
+
+  getTemperature() {
+    document.querySelector('#geolocation').innerHTML = `Температура сейчас: ${this.getOneDayWeather()}°${get('temperature')}`
+  }
+
+  getOneDayWeather() { 
+    getWeather(this.location.city, 1).then((key) => {
+      document.querySelector('#geolocation').innerHTML = `${key.location.name}, ${key.location.country}`
+
+      document.querySelector('#temperature').innerHTML = `Температура сейчас: ${key.current.temp_c}
+      °${get('temperature')}`
+
+      document.querySelector('#one_day_weather').innerHTML = `На улице ${key.current.condition.text}, 
+      ощущаемая температура ${key.current.feelslike_c}°${get('temperature')},</br>
+      скорость ветра ${((key.current.wind_kph * 1) / 3.6).toFixed(1)}м/с, влажность ${key.current.humidity}%`
+    })
+  }
   createElementsInBlock() {
     let layoutElem = document.querySelector('.weather_today')
     layoutElem.innerHTML = `
-      <p>Город, страна</p>
+      <p id='geolocation'></p>
       <p>Текущая дата: ${this.getDate()}</p>
       <p id='time'></p> 
-      <p>Температура сейчас: NUM°${get('temperature')}</p>
-      <p>Описание погоды, ощущаемая температура 28C,</br>скорость ветра 5м/с, влажность 90%</p>
+      <p id='temperature'></p>
+      <p id='one_day_weather'></p>
       <img>
     `
   }
 
-  render() {
+  init() {
     this.createWrapper()
     this.createElementsInBlock()
     this.getCurrentTime()
+    this.getLocation()
+    this.getOneDayWeather()
+  }
+
+  render() {
+    this.init()
   }
 }

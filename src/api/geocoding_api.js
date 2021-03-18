@@ -1,5 +1,3 @@
-import { geolocation } from "../api/geolocation";
-
 var apikey = '8f29a8db83434c3b87ec70c8ce68c325';
   var latitude = '51.0';
   var longitude = '7.0';

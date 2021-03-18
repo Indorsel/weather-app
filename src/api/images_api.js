@@ -1,4 +1,4 @@
-import { request } from './requestsForApi'
+import { request } from './fetchRequest'
 import { IMAGES_API_KEY } from '../const/api_keys'
 
 export const getImage = () => {

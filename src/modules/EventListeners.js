@@ -6,12 +6,12 @@ import { getGeolocation } from '../api/geolocation_api'
 import { changeLanguages } from '../utils/changeLanguages'
 import { refreshBackground } from '../utils/refreshBackground'
 import { GeolocationData } from './GeolocationData'
+import { WeatherToday } from './WeatherToday'
+import { WeatherInThreeDays } from './WeatherInThreeDays'
 
 
 export class EventListeners {
-  constructor() {
-
-  }
+  constructor() {}
 
   async listeners() {
     // смена языка
@@ -35,24 +35,29 @@ export class EventListeners {
 
 
     //смена фона
-    //при загрузке страницы //добавить в localStorage
-    // window.onload = () => imagesApi.getImage().then(({urls}) => refreshBackground(`${urls.full}`))
-
     //по клику на кнопку
     document.querySelector('.image').addEventListener('click', function(event) {
-      getImage().then(({urls}) => {
-        set('image', `${urls.full}`)
-        refreshBackground(get('image'))
-      })
+      getImage().then(({urls}) => refreshBackground(`${urls.full}`))
     })
 
 
     //получение геолокации
     window.onload = () => {
-      // debugger
-      getGeolocation().then((key) => { //передавать сразу в класс
+      getGeolocation().then((key) => {
         let location = key.loc.split(',')
+        console.log(location)
+        
         let geoData = new GeolocationData(location)
+        geoData.render()
+
+        let weatherToday = new WeatherToday(key)
+        weatherToday.render()
+
+        let weatherInThreeDays = new WeatherInThreeDays(key)
+        weatherInThreeDays.render()
+        
+        //смена фона при загрузке
+        getImage().then(({urls}) => refreshBackground(`${urls.full}`))
       })
     }
   }

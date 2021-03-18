@@ -8,12 +8,12 @@ export const WEATHER_API_KEY = {
   url: 'https://api.weatherapi.com/v1/'
 }
 
-export const WEATHER_CLIMACELL_API_KEY = {
-  token: '7EwmswTsGFjxFf63sBp3TaIdUyAdQ3HL',
-  url: 'https://api.climacell.co/v3/'
-}
+// export const WEATHER_CLIMACELL_API_KEY = {
+//   token: '7EwmswTsGFjxFf63sBp3TaIdUyAdQ3HL',
+//   url: 'https://api.climacell.co/v3/'
+// }
 
-export const IMAGES_API_KEY = {                         //50 изображений в час тариф
+export const IMAGES_API_KEY = {                         //50 изображений в час ограничение тарифа
   token: 'S4GPRR9CmiUEm-v9ZhN5ZkuFyibE99rCxArHa2L7r-Y',
   url: 'https://api.unsplash.com/'
 }
