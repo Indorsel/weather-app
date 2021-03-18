@@ -1,6 +1,6 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var path = (path = require('path'))
-var webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
