@@ -57,7 +57,7 @@ export class EventListeners {
         weatherInThreeDays.render()
         
         //смена фона при загрузке
-        getImage().then(({urls}) => refreshBackground(`${urls.full}`))
+        // getImage().then(({urls}) => refreshBackground(`${urls.full}`))
       })
     }
   }

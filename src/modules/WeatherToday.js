@@ -44,12 +44,16 @@ export class WeatherToday {
 
   getOneDayWeather() { 
     getWeather(this.location.city, 1).then((key) => {
-      document.querySelector('#geolocation').innerHTML = `${key.location.name}, ${key.location.country}`
+      console.log(key)
+      document.getElementById('geolocation').innerHTML = `${key.location.name}, ${key.location.country}`
 
-      document.querySelector('#temperature').innerHTML = `Температура сейчас: ${key.current.temp_c}
+      let icon = 'http:' + key.current.condition.icon
+      document.getElementById('icon_one_day').innerHTML =`<img src='${icon}'>`
+
+      document.getElementById('temperature').innerHTML = `Температура сейчас: ${key.current.temp_c}
       °${get('temperature')}`
 
-      document.querySelector('#one_day_weather').innerHTML = `На улице ${key.current.condition.text}, 
+      document.getElementById('one_day_weather').innerHTML = `На улице ${key.current.condition.text}, 
       ощущаемая температура ${key.current.feelslike_c}°${get('temperature')},</br>
       скорость ветра ${((key.current.wind_kph * 1) / 3.6).toFixed(1)}м/с, влажность ${key.current.humidity}%`
     })
@@ -62,7 +66,7 @@ export class WeatherToday {
       <p id='time'></p> 
       <p id='temperature'></p>
       <p id='one_day_weather'></p>
-      <img>
+      <p id='icon_one_day'></p>
     `
   }
 
