@@ -22,6 +22,10 @@ export class WeatherInThreeDays {
       document.querySelector('.temperature').addEventListener('mousedown', function (event) {
         forecastForThreeDays(key)
       })
+
+      document.querySelector('.language').addEventListener('mousedown', function (event) {
+        forecastForThreeDays(key)
+      })
     })
   }
 

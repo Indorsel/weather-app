@@ -12,7 +12,7 @@ export class ControlBlock {
       button.innerText = 'En / Ru'
     } 
     if (name === 'temperature') {
-      button.innerText = 'C / F'
+      button.innerText = '°C / °F'
     }
     if (name === 'image') {
       button.innerText = 'Refresh background'

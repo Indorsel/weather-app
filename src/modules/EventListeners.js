@@ -22,7 +22,6 @@ export class EventListeners {
     window.onload = () => {
       getGeolocation().then((key) => {
         let location = key.loc.split(',')
-        // console.log(location)
         
         let geoData = new GeolocationData(location)
         geoData.render()
@@ -34,11 +33,11 @@ export class EventListeners {
         weatherInThreeDays.render()
         
         //смена фона при загрузке
-        // getImage().then(({urls}) => refreshBackground(`${urls.full}`))
+        getImage().then(({urls}) => refreshBackground(`${urls.full}`))
       })
     }
 
-    // смена языка
+    //смена языка
     document.querySelector('.language').addEventListener('mousedown', function (event) {
       get('lang') === EN ? set('lang', RU) : set('lang', EN)
       changeLanguages(get('lang'))
@@ -56,11 +55,9 @@ export class EventListeners {
         return
       }
       if(event.keyCode === 13) {
-        // console.log('Передаваемые данные: ' + this.value)
         //получение координат введённого города
         getGeocodingData(this.value).then((response) => {
           let coordinates = response.results[0].geometry
-          // console.log('Geocoding data for ' + this.value + ': ' + coordinates.lat + ', ' + coordinates.lng)
           //получение погоды для введённого города
           getWeather(coordinates, 1).then(key => {
             let weatherToday = new WeatherToday(key)

@@ -12,7 +12,7 @@ export class Main {
     set('temperature', C)
   }
   
-  render() {
+  createPage() {
     this.defaultSettings()
 
     let controlBlock = new ControlBlock()
@@ -23,5 +23,9 @@ export class Main {
 
     const eventListeners = new EventListeners()
     eventListeners.isListenersOn()  
+  }
+
+  render() {
+    this.createPage()
   }
 }

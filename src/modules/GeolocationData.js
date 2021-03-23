@@ -1,6 +1,7 @@
 import { elementCreate } from '../utils/elementCreate'
 import { MAP_API_KEY } from "../const/api_keys";
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import { get } from '../utils/localStorage';
 
 export class GeolocationData {
   constructor(value) {
@@ -24,6 +25,7 @@ export class GeolocationData {
     document.body.append(layoutElem)
             
     let location = elementCreate('div', 'location')
+    location.id = 'coordinates'
     layoutElem.append(location)
     if(this.value[0] === undefined) {
       this.value[1] = `${this.value.lon}`
@@ -33,7 +35,16 @@ export class GeolocationData {
     }
     let longtitude = this.getDegreesMinutesFromCoordinates(this.value[1])
     let latitude = this.getDegreesMinutesFromCoordinates(this.value[0])
-    document.querySelector('.location').innerHTML = `<p>долгота ${longtitude}, широта ${latitude}</p>`
+
+    document.querySelector('#coordinates').innerHTML = `<p>logtitude ${longtitude}, latitude ${latitude}</p>`
+
+    document.querySelector('.language').addEventListener('mousedown', function (event) {
+      if(get('lang') === 'en') {
+        document.querySelector('#coordinates').innerHTML = `<p>logtitude ${longtitude}, latitude ${latitude}</p>`
+      } else {
+        document.querySelector('#coordinates').innerHTML = `<p>долгота ${longtitude}, широта ${latitude}</p>`
+      }
+    })
 
     let mapWrapper = elementCreate('div', 'mapbox')
     mapWrapper.id = 'map'

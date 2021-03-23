@@ -1,9 +1,8 @@
 import { getWeather } from '../api/weahter_api';
-import { C, F } from '../const/temperatures';
-import { get, set } from '../utils/localStorage';
-import { elementCreate } from '../utils/elementCreate'
+import { get } from '../utils/localStorage';
+import { elementCreate } from '../utils/elementCreate';
 import { changeTemperatures } from '../utils/changeTemperatures';
-import { WeatherInThreeDays } from './WeatherInThreeDays';
+import { paragraphs } from '../const/paragraphs';
 
 export class WeatherToday {
   constructor(location) {
@@ -18,27 +17,64 @@ export class WeatherToday {
 
   getDate() {
     let date =  new Date()
-    let newDate = date.toLocaleString('ru', {
-      weekday: 'short',
-      day: 'numeric',
-      month: 'long'
+    let newDate
+    if (get('lang') === 'ru') {
+      newDate = date.toLocaleString('ru', {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'long'
+      })
+      newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
+    } else {
+      newDate = date.toLocaleString('en', {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'long'
+      })
+      newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
+      document.querySelector('#current_date').innerHTML = `${paragraphs.en.current_date}${newDate}`
+    }
+
+    document.querySelector('.language').addEventListener('mousedown', function (event) {
+      if (get('lang') === 'ru') {
+        newDate = date.toLocaleString('ru', {
+          weekday: 'short',
+          day: 'numeric',
+          month: 'long'
+        })
+        newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
+        document.querySelector('#current_date').innerHTML = `${paragraphs.ru.current_date}${newDate}`
+      } else {
+        newDate = date.toLocaleString('en', {
+          weekday: 'short',
+          day: 'numeric',
+          month: 'long'
+        })
+        newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
+        document.querySelector('#current_date').innerHTML = `${paragraphs.en.current_date}${newDate}`
+      }
     })
-    newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
-    return newDate
   }
 
   getTime() {
     let date = new Date()
-    document.querySelector('#time').innerHTML = `Время: ${date.getHours() + 1}:${date.getMinutes()}:${date.getSeconds()}`
+    if (get('lang') === 'en') {
+      document.querySelector('#time').innerHTML = `${paragraphs.en.time} ${date.getHours() + 1}:${date.getMinutes()}:${date.getSeconds()}`
+    } 
+
+    document.querySelector('.language').addEventListener('mousedown', function (event) {
+      if (get('lang') === 'ru') {
+        document.querySelector('#time').innerHTML = `${paragraphs.ru.time} ${date.getHours() + 1}:${date.getMinutes()}:${date.getSeconds()}`
+      } else {
+        document.querySelector('#time').innerHTML = `${paragraphs.en.time} ${date.getHours() + 1}:${date.getMinutes()}:${date.getSeconds()}`
+      }
+    })
+
   }
 
   getCurrentTime() {
     this.getTime()
     setInterval(this.getTime, 1000)
-  }
-
-  getTemperature() {
-    document.querySelector('#geolocation').innerHTML = `Температура сейчас: ${this.getOneDayWeather()}°${get('temperature')}`
   }
 
 
@@ -51,13 +87,16 @@ export class WeatherToday {
       document.querySelector('.temperature').addEventListener('mousedown', function (event) {
         changeTemperatures(key)
       })
+      document.querySelector('.language').addEventListener('mousedown', function (event) {
+        changeTemperatures(key)
+      })
     })
   }
   createElementsInBlock() {
     let layoutElem = document.querySelector('.weather_today')
     layoutElem.innerHTML = `
       <p id='geolocation'></p>
-      <p>Текущая дата: ${this.getDate()}</p>
+      <p id='current_date'></p>
       <p id='time'></p> 
       <p id='temperature'></p>
       <p id='one_day_weather'></p>
@@ -68,6 +107,7 @@ export class WeatherToday {
   init() {
     this.createWrapper()
     this.createElementsInBlock()
+    this.getDate()
     this.getCurrentTime()
     this.getOneDayWeather()
   }
