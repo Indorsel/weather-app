@@ -9,8 +9,12 @@ export const WEATHER_API_KEY = {
 }
 
 // export const WEATHER_CLIMACELL_API_KEY = {
-//   token: '7EwmswTsGFjxFf63sBp3TaIdUyAdQ3HL',
+//   token: 'rh8L0roTYDgi9hvbGsd6X3cu5rRWiV05',
 //   url: 'https://api.climacell.co/v3/'
+// }
+// export const WEATHER_CLIMACELL_API_KEY = {
+//   token: '7EwmswTsGFjxFf63sBp3TaIdUyAdQ3HL',
+//   url: 'https://api.climacell.co/v4/'
 // }
 
 export const IMAGES_API_KEY = {                         //50 изображений в час ограничение тарифа

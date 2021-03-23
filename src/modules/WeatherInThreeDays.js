@@ -4,9 +4,8 @@ import { forecastForThreeDays } from '../utils/forecastForThreeDays';
 
 
 export class WeatherInThreeDays {
-  constructor(location, temperature) {
+  constructor(location) {
     this.location = location
-    this.temperature = temperature
   }
 
   createWrapper() {
@@ -16,8 +15,13 @@ export class WeatherInThreeDays {
   }
 
   getForecast() {
-    getWeather(this.location.city, 3).then((key) => {
+    this.location.loc === undefined ? this.location.loc = this.location.location.lat + ',' + this.location.location.lon : this.location.loc
+    getWeather(this.location.loc, 3).then((key) => {
       forecastForThreeDays(key)
+
+      document.querySelector('.temperature').addEventListener('mousedown', function (event) {
+        forecastForThreeDays(key)
+      })
     })
   }
 

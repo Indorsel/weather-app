@@ -1,7 +1,6 @@
 import { ControlBlock } from "./ControlBlock";
 import { WeatherLayout } from "./WeatherLayout";
 import { EventListeners } from "./EventListeners";
-import { GeolocationData } from "./GeolocationData";
 import { set } from '../utils/localStorage'
 import { EN } from '../const/languages'
 import { C } from '../const/temperatures'

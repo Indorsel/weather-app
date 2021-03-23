@@ -1,4 +1,5 @@
 import { elementCreate } from '../utils/elementCreate'
+import { get } from '../utils/localStorage';
 
 
 export class ControlBlock {
@@ -27,6 +28,7 @@ export class ControlBlock {
     let bodyElem = elementCreate('div', 'control_block')
     document.body.append(bodyElem)
     bodyElem.append(this.createInputSearch())
+    document.querySelector('.search').placeholder = `Press 'Enter' for search`
     bodyElem.append(this.createButton('language'))
     bodyElem.append(this.createButton('temperature'))
     bodyElem.append(this.createButton('image'))

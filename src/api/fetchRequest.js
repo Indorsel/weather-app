@@ -1,5 +1,4 @@
 export async function request(...args) {
-  // debugger
   const response = await fetch(...args)
 
   if (!response.ok) {

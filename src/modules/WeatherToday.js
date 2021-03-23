@@ -1,11 +1,13 @@
-import { get } from '../utils/localStorage';
-import { elementCreate } from '../utils/elementCreate'
 import { getWeather } from '../api/weahter_api';
+import { C, F } from '../const/temperatures';
+import { get, set } from '../utils/localStorage';
+import { elementCreate } from '../utils/elementCreate'
+import { changeTemperatures } from '../utils/changeTemperatures';
+import { WeatherInThreeDays } from './WeatherInThreeDays';
 
 export class WeatherToday {
-  constructor(location, temperature) {
+  constructor(location) {
     this.location = location
-    this.temperature = temperature
   }
 
   createWrapper() {
@@ -35,27 +37,20 @@ export class WeatherToday {
     setInterval(this.getTime, 1000)
   }
 
-  getLocation() {
-  }
-
   getTemperature() {
     document.querySelector('#geolocation').innerHTML = `Температура сейчас: ${this.getOneDayWeather()}°${get('temperature')}`
   }
 
+
   getOneDayWeather() { 
-    getWeather(this.location.city, 1).then((key) => {
-      console.log(key)
-      document.getElementById('geolocation').innerHTML = `${key.location.name}, ${key.location.country}`
-
-      let icon = 'http:' + key.current.condition.icon
-      document.getElementById('icon_one_day').innerHTML =`<img src='${icon}'>`
-
-      document.getElementById('temperature').innerHTML = `Температура сейчас: ${key.current.temp_c}
-      °${get('temperature')}`
-
-      document.getElementById('one_day_weather').innerHTML = `На улице ${key.current.condition.text}, 
-      ощущаемая температура ${key.current.feelslike_c}°${get('temperature')},</br>
-      скорость ветра ${((key.current.wind_kph * 1) / 3.6).toFixed(1)}м/с, влажность ${key.current.humidity}%`
+    this.location.city === undefined ? this.location.city = this.location.location.name : this.location.city
+    this.location.loc === undefined ? this.location.loc = this.location.location.lat + ',' + this.location.location.lon : this.location.loc
+    getWeather(this.location.loc, 1).then((key) => {
+      changeTemperatures(key)
+      
+      document.querySelector('.temperature').addEventListener('mousedown', function (event) {
+        changeTemperatures(key)
+      })
     })
   }
   createElementsInBlock() {
@@ -74,7 +69,6 @@ export class WeatherToday {
     this.createWrapper()
     this.createElementsInBlock()
     this.getCurrentTime()
-    this.getLocation()
     this.getOneDayWeather()
   }
 
