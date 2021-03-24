@@ -1,5 +1,4 @@
 import { elementCreate } from '../utils/elementCreate'
-import { get } from '../utils/localStorage';
 
 
 export class ControlBlock {

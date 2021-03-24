@@ -22,17 +22,19 @@ export class WeatherToday {
       newDate = date.toLocaleString('ru', {
         weekday: 'short',
         day: 'numeric',
-        month: 'long'
+        month: 'long',
+        timeZone: get('timezone'),
       })
       newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
     } else {
       newDate = date.toLocaleString('en', {
         weekday: 'short',
         day: 'numeric',
-        month: 'long'
+        month: 'long',
+        timeZone: get('timezone'),
       })
       newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
-      document.querySelector('#current_date').innerHTML = `${paragraphs.en.current_date}${newDate}`
+      document.querySelector('#current_date').innerHTML = `${paragraphs.en.current_date}: ${newDate}`
     }
 
     document.querySelector('.language').addEventListener('mousedown', function (event) {
@@ -43,7 +45,7 @@ export class WeatherToday {
           month: 'long'
         })
         newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
-        document.querySelector('#current_date').innerHTML = `${paragraphs.ru.current_date}${newDate}`
+        document.querySelector('#current_date').innerHTML = `${paragraphs.ru.current_date}: ${newDate}`
       } else {
         newDate = date.toLocaleString('en', {
           weekday: 'short',
@@ -51,25 +53,36 @@ export class WeatherToday {
           month: 'long'
         })
         newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
-        document.querySelector('#current_date').innerHTML = `${paragraphs.en.current_date}${newDate}`
+        document.querySelector('#current_date').innerHTML = `${paragraphs.en.current_date}: ${newDate}`
       }
     })
   }
 
   getTime() {
     let date = new Date()
-    if (get('lang') === 'en') {
-      document.querySelector('#time').innerHTML = `${paragraphs.en.time} ${date.getHours() + 1}:${date.getMinutes()}:${date.getSeconds()}`
-    } 
-
-    document.querySelector('.language').addEventListener('mousedown', function (event) {
-      if (get('lang') === 'ru') {
-        document.querySelector('#time').innerHTML = `${paragraphs.ru.time} ${date.getHours() + 1}:${date.getMinutes()}:${date.getSeconds()}`
-      } else {
-        document.querySelector('#time').innerHTML = `${paragraphs.en.time} ${date.getHours() + 1}:${date.getMinutes()}:${date.getSeconds()}`
-      }
+    let timezoneTime
+    //можно выбрать формат времени (AM/PM) через get('lang') вместо 'ru', 
+    //но будет задержка ререндера часов при смене формата
+    timezoneTime = date.toLocaleString('ru', {
+      timeZone: get('timezone'),
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
     })
 
+    if(get('lang') === 'en') {
+      document.querySelector('#time').innerHTML = `${paragraphs.en.time}: ${timezoneTime}`
+    } else {
+      document.querySelector('#time').innerHTML = `${paragraphs.ru.time}: ${timezoneTime}`
+    }
+
+    document.querySelector('.language').addEventListener('mousedown', function () {
+      if (get('lang') === 'ru') {
+        document.querySelector('#time').innerHTML = `${paragraphs.ru.time}: ${timezoneTime}`
+      } else {
+        document.querySelector('#time').innerHTML = `${paragraphs.en.time}: ${timezoneTime}`
+      }
+    })
   }
 
   getCurrentTime() {
@@ -108,6 +121,7 @@ export class WeatherToday {
     this.createWrapper()
     this.createElementsInBlock()
     this.getDate()
+    // this.getTime()
     this.getCurrentTime()
     this.getOneDayWeather()
   }

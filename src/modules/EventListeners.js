@@ -1,5 +1,3 @@
-// import { C, F } from '../const/temperatures'
-// import { changeTemperatures } from '../utils/changeTemperatures'
 import { RU, EN } from '../const/languages'
 import { getImage } from '../api/images_api'
 import { WeatherToday } from './WeatherToday'
@@ -22,18 +20,19 @@ export class EventListeners {
     window.onload = () => {
       getGeolocation().then((key) => {
         let location = key.loc.split(',')
-        
-        let geoData = new GeolocationData(location)
-        geoData.render()
 
+        set('timezone', key.timezone)
         let weatherToday = new WeatherToday(key)
         weatherToday.render()
 
         let weatherInThreeDays = new WeatherInThreeDays(key)
         weatherInThreeDays.render()
+
+        // let geoData = new GeolocationData(location)
+        // geoData.render()
         
         //смена фона при загрузке
-        getImage().then(({urls}) => refreshBackground(`${urls.full}`))
+        // getImage().then(({urls}) => refreshBackground(`${urls.full}`))
       })
     }
 
@@ -60,14 +59,16 @@ export class EventListeners {
           let coordinates = response.results[0].geometry
           //получение погоды для введённого города
           getWeather(coordinates, 1).then(key => {
+            set('timezone', key.location.tz_id)
             let weatherToday = new WeatherToday(key)
             weatherToday.getOneDayWeather()
-    
+            weatherToday.getCurrentTime()
+            
             let weatherInThreeDays = new WeatherInThreeDays(key)
             weatherInThreeDays.getForecast()
 
-            let geoData = new GeolocationData(key.loc)
-            geoData.render()
+            // let geoData = new GeolocationData(key.loc)
+            // geoData.render()
           })
           //отлов ошибки сервера, если нет погоды по этим координатам
           .catch(() => get('lang') === RU ? alert('Введите правильное название города') : alert('Enter the correct city name'))
@@ -78,8 +79,7 @@ export class EventListeners {
     })
     
 
-    //смена фона
-    //по клику на кнопку
+    //смена фона по клику на кнопку
     document.querySelector('.image').addEventListener('click', function(event) {
       getImage().then(({urls}) => refreshBackground(`${urls.full}`))
     })    

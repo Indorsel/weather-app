@@ -1,6 +1,6 @@
-import { elementCreate } from '../utils/elementCreate'
+import { elementCreate } from '../utils/elementCreate';
 import { MAP_API_KEY } from "../const/api_keys";
-import mapboxgl from 'mapbox-gl/dist/mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
 import { get } from '../utils/localStorage';
 
 export class GeolocationData {
@@ -38,7 +38,7 @@ export class GeolocationData {
 
     document.querySelector('#coordinates').innerHTML = `<p>logtitude ${longtitude}, latitude ${latitude}</p>`
 
-    document.querySelector('.language').addEventListener('mousedown', function (event) {
+    document.querySelector('.language').addEventListener('mousedown', function () {
       if(get('lang') === 'en') {
         document.querySelector('#coordinates').innerHTML = `<p>logtitude ${longtitude}, latitude ${latitude}</p>`
       } else {
