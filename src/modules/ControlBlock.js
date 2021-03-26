@@ -2,7 +2,10 @@ import { elementCreate } from '../utils/elementCreate'
 
 
 export class ControlBlock {
-  constructor() {}
+  constructor(template, lang = 'en') {
+    this.template = template, 
+    this.lang = lang
+  }
 
   createButton(name) {
     let button = document.createElement('button')

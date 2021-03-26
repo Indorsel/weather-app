@@ -3,10 +3,14 @@ import { get } from '../utils/localStorage';
 import { elementCreate } from '../utils/elementCreate';
 import { changeTemperatures } from '../utils/changeTemperatures';
 import { dictionary } from '../const/dictionary';
+import { EN, RU} from '../const/languages'
+
 
 export class WeatherToday {
-  constructor(location) {
-    this.location = location
+  constructor(location, template, lang = EN) {
+    this.location = location,
+    this.template = template,
+    this.lang = lang
   }
 
   createWrapper() {

@@ -1,5 +1,9 @@
 import { dictionary } from '../const/dictionary';
 
+export const language = lang => {
+  dictionary = lang === 'ru' ? dictionary.ru : dictionary.en
+}
+
 export const changeLanguages = (lang) => {
   if (lang === 'ru') {
     document.querySelector('.language').innerHTML = dictionary.ru.language

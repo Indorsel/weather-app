@@ -1,11 +1,15 @@
 import { elementCreate } from '../utils/elementCreate'
 import { getWeather } from '../api/weahter_api';
 import { forecastForThreeDays } from '../utils/forecastForThreeDays';
+import { EN, RU} from '../const/languages'
+
 
 
 export class WeatherInThreeDays {
-  constructor(location) {
-    this.location = location
+  constructor(location, template, lang = EN) {
+    this.location = location,
+    this.template = template,
+    this.lang = lang
   }
 
   createWrapper() {

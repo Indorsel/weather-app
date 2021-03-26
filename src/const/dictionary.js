@@ -17,18 +17,32 @@ export const dictionary = {
     weatherThreeDays: {
       temperature: 'Средняя температура днём',
     },
+    geolocationData: {
+      latitude: 'долгота',
+      longitude: 'широта',
+    }
   },
   en: {
-    language: 'En / Ru',
-    image: 'Refresh background',
-    search: `Press 'Enter' for search`,
-    time: 'Time',
-    current_date: 'Current date',
-    temperature: 'Current temperature',
-    one_day_weather_outside: `It's `,
-    one_day_weather_temp: ' outside, perceived temperature ',
-    one_day_weather_wind: 'wind speed ',
-    one_day_weather_humidity: 'm/s, humidity ',
-    three_days_temperature: 'Average daytime temperature',
+    controlBlock: {
+      language: 'En / Ru',
+      image: 'Refresh background',
+      search: `Press 'Enter' for search`,
+    }, 
+    weatherToday: {
+      time: 'Time',
+      current_date: 'Current date',
+      temperature: 'Current temperature',
+      one_day_weather_outside: `It's `,
+      one_day_weather_temp: ' outside, perceived temperature ',
+      one_day_weather_wind: 'wind speed ',
+      one_day_weather_humidity: 'm/s, humidity ',
+    },
+    weatherThreeDays: {
+      temperature: 'Average daytime temperature',
+    },
+    geolocationData: {
+      latitude: 'latitude',
+      longitude: 'longitude',
+    }
   }
 }

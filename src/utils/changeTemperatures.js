@@ -9,7 +9,10 @@ export const changeToFarenheits = (str) => {
 }
 
 export const changeToCelsius = (str) => {
-
+  str = str.split('°')
+  str[0] = ((str[0] - 32) * 5 / 9).toFixed(1)
+  str[1] = 'C'
+  return str.join('°')
 }
 
 export const changeTemperatures = (key) => {

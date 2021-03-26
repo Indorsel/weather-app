@@ -2,10 +2,14 @@ import { elementCreate } from '../utils/elementCreate';
 import { MAP_API_KEY } from "../const/api_keys";
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
 import { get } from '../utils/localStorage';
+import { EN, RU} from '../const/languages'
+
 
 export class GeolocationData {
-  constructor(value) {
-    this.value = value
+  constructor(value, template, lang = EN) {
+    this.value = value,
+    this.template = template,
+    this.lang = lang
   }
 
   getDegreesMinutesFromCoordinates(str) {

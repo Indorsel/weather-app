@@ -9,6 +9,7 @@ import { getGeocodingData } from '../api/geocoding_api';
 import { get, set } from '../utils/localStorage'
 import { changeLanguages } from '../utils/changeLanguages'
 import { refreshBackground } from '../utils/refreshBackground'
+import { Main } from './Main'
 
 
 export class EventListeners {
@@ -40,11 +41,13 @@ export class EventListeners {
     document.querySelector('.language').addEventListener('mousedown', function (event) {
       get('lang') === EN ? set('lang', RU) : set('lang', EN)
       changeLanguages(get('lang'))
+      let main = new Main(lang, template)
     })
 
     //смена единицы измерения температуры
     document.querySelector('.temperature').addEventListener('mousedown', function (event) {
       get('temperature') === 'C' ? set('temperature', 'F') : set('temperature', 'C')
+      let main = new Main(lang, template)
     })
 
     //строка поиска
