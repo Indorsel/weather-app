@@ -2,7 +2,7 @@ import { getWeather } from '../api/weahter_api';
 import { get } from '../utils/localStorage';
 import { elementCreate } from '../utils/elementCreate';
 import { changeTemperatures } from '../utils/changeTemperatures';
-import { paragraphs } from '../const/paragraphs';
+import { dictionary } from '../const/dictionary';
 
 export class WeatherToday {
   constructor(location) {
@@ -26,9 +26,9 @@ export class WeatherToday {
     })
     newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
     if (get('lang') === 'ru') {
-      document.querySelector('#current_date').innerHTML = `${paragraphs.ru.current_date}: ${newDate}`
+      document.querySelector('#current_date').innerHTML = `${dictionary.ru.current_date}: ${newDate}`
     } else {
-      document.querySelector('#current_date').innerHTML = `${paragraphs.en.current_date}: ${newDate}`
+      document.querySelector('#current_date').innerHTML = `${dictionary.en.current_date}: ${newDate}`
     }
 
     document.querySelector('.language').addEventListener('mousedown', function (event) {
@@ -40,9 +40,9 @@ export class WeatherToday {
       newDate = newDate.charAt(0).toUpperCase() + newDate.slice(1);
 
       if (get('lang') === 'ru') {
-        document.querySelector('#current_date').innerHTML = `${paragraphs.ru.current_date}: ${newDate}`
+        document.querySelector('#current_date').innerHTML = `${dictionary.ru.current_date}: ${newDate}`
       } else {
-        document.querySelector('#current_date').innerHTML = `${paragraphs.en.current_date}: ${newDate}`
+        document.querySelector('#current_date').innerHTML = `${dictionary.en.current_date}: ${newDate}`
       }
     })
   }
@@ -60,16 +60,16 @@ export class WeatherToday {
     })
 
     if(get('lang') === 'en') {
-      document.querySelector('#time').innerHTML = `${paragraphs.en.time}: ${timezoneTime}`
+      document.querySelector('#time').innerHTML = `${dictionary.en.time}: ${timezoneTime}`
     } else {
-      document.querySelector('#time').innerHTML = `${paragraphs.ru.time}: ${timezoneTime}`
+      document.querySelector('#time').innerHTML = `${dictionary.ru.time}: ${timezoneTime}`
     }
 
     document.querySelector('.language').addEventListener('mousedown', function () {
       if (get('lang') === 'ru') {
-        document.querySelector('#time').innerHTML = `${paragraphs.ru.time}: ${timezoneTime}`
+        document.querySelector('#time').innerHTML = `${dictionary.ru.time}: ${timezoneTime}`
       } else {
-        document.querySelector('#time').innerHTML = `${paragraphs.en.time}: ${timezoneTime}`
+        document.querySelector('#time').innerHTML = `${dictionary.en.time}: ${timezoneTime}`
       }
     })
   }

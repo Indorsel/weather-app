@@ -1,5 +1,5 @@
 import { get } from '../utils/localStorage';
-import { paragraphs } from '../const/paragraphs';
+import { dictionary } from '../const/dictionary';
 
 export const forecastForThreeDays = (key) => {
   let arr = [0, 1, 2]
@@ -13,13 +13,13 @@ export const forecastForThreeDays = (key) => {
       if (get('lang') === 'ru') {
         document.querySelector(`#day_${days[el]}`).innerHTML = `
           <p>${newDate}</p> 
-          <p>${paragraphs.ru.three_days_temperature}:<br>${key.forecast.forecastday[el].day.avgtemp_c.toFixed(1)}°${get('temperature')}</p> 
+          <p>${dictionary.ru.three_days_temperature}:<br>${key.forecast.forecastday[el].day.avgtemp_c.toFixed(1)}°${get('temperature')}</p> 
           <p><img src='${icon}'></p> 
         `
       } else {
         document.querySelector(`#day_${days[el]}`).innerHTML = `
           <p>${newDate}</p> 
-          <p>${paragraphs.en.three_days_temperature}:<br>${key.forecast.forecastday[el].day.avgtemp_c.toFixed(1)}°${get('temperature')}</p> 
+          <p>${dictionary.en.three_days_temperature}:<br>${key.forecast.forecastday[el].day.avgtemp_c.toFixed(1)}°${get('temperature')}</p> 
           <p><img src='${icon}'></p> 
         `
       }
@@ -32,13 +32,13 @@ export const forecastForThreeDays = (key) => {
       if (get('lang') === 'ru') {
         document.querySelector(`#day_${days[el]}`).innerHTML = `
           <p>${newDate}</p> 
-          <p>${paragraphs.ru.three_days_temperature}:<br>${((key.forecast.forecastday[el].day.avgtemp_c * 9 / 5) + 32).toFixed(1)}°${get('temperature')}</p> 
+          <p>${dictionary.ru.three_days_temperature}:<br>${((key.forecast.forecastday[el].day.avgtemp_c * 9 / 5) + 32).toFixed(1)}°${get('temperature')}</p> 
           <p><img src='${icon}'></p> 
         `
       } else {
         document.querySelector(`#day_${days[el]}`).innerHTML = `
           <p>${newDate}</p> 
-          <p>${paragraphs.en.three_days_temperature}:<br>${((key.forecast.forecastday[el].day.avgtemp_c * 9 / 5) + 32).toFixed(1)}°${get('temperature')}</p> 
+          <p>${dictionary.en.three_days_temperature}:<br>${((key.forecast.forecastday[el].day.avgtemp_c * 9 / 5) + 32).toFixed(1)}°${get('temperature')}</p> 
           <p><img src='${icon}'></p> 
         `
       }
