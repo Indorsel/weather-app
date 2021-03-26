@@ -36,11 +36,11 @@ export class GeolocationData {
     let longtitude = this.getDegreesMinutesFromCoordinates(this.value[1])
     let latitude = this.getDegreesMinutesFromCoordinates(this.value[0])
 
-    document.querySelector('#coordinates').innerHTML = `<p>logtitude ${longtitude}, latitude ${latitude}</p>`
+    document.querySelector('#coordinates').innerHTML = `<p>longitude ${longtitude}, latitude ${latitude}</p>`
 
     document.querySelector('.language').addEventListener('mousedown', function () {
       if(get('lang') === 'en') {
-        document.querySelector('#coordinates').innerHTML = `<p>logtitude ${longtitude}, latitude ${latitude}</p>`
+        document.querySelector('#coordinates').innerHTML = `<p>longitude ${longtitude}, latitude ${latitude}</p>`
       } else {
         document.querySelector('#coordinates').innerHTML = `<p>долгота ${longtitude}, широта ${latitude}</p>`
       }

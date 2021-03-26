@@ -28,11 +28,11 @@ export class EventListeners {
         let weatherInThreeDays = new WeatherInThreeDays(key)
         weatherInThreeDays.render()
 
-        // let geoData = new GeolocationData(location)
-        // geoData.render()
+        let geoData = new GeolocationData(location)
+        geoData.render()
         
         //смена фона при загрузке
-        // getImage().then(({urls}) => refreshBackground(`${urls.full}`))
+        getImage().then(({urls}) => refreshBackground(`${urls.full}`))
       })
     }
 
@@ -67,8 +67,8 @@ export class EventListeners {
             let weatherInThreeDays = new WeatherInThreeDays(key)
             weatherInThreeDays.getForecast()
 
-            // let geoData = new GeolocationData(key.loc)
-            // geoData.render()
+            let geoData = new GeolocationData(key.loc)
+            geoData.render()
           })
           //отлов ошибки сервера, если нет погоды по этим координатам
           .catch(() => get('lang') === RU ? alert('Введите правильное название города') : alert('Enter the correct city name'))
