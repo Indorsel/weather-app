@@ -14,7 +14,7 @@ module.exports = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
   },
   plugins: [new HtmlWebpackPlugin(), new webpack.HotModuleReplacementPlugin(), new MiniCssExtractPlugin()],
